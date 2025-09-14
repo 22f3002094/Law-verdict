@@ -46,6 +46,7 @@ export default function DeviceLimitModal({ isOpen, onClose, devices, onForceLogo
           </ul>
         </div>
         <div className="mt-6 flex justify-end space-x-4">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/api/auth/logout" className="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
             Cancel Login
           </a>

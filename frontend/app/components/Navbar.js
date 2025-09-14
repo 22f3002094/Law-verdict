@@ -17,6 +17,7 @@ export default function Navbar() {
           </div>
           <div className="flex items-center space-x-4">
             {!isLoading && !user && (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages
               <a
                 href="/api/auth/login"
                 className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-105 hover:bg-blue-700"
