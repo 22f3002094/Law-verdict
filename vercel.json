@@ -6,7 +6,7 @@
       "use": "@vercel/python"
     },
     {
-      "src": "frontend/next.config.mjs",
+      "src": "frontend/package.json",
       "use": "@vercel/next"
     }
   ],
@@ -14,10 +14,6 @@
     {
       "src": "/api/(.*)",
       "dest": "api/main.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
     }
   ]
 }
