@@ -113,15 +113,22 @@ export default function ProfilePage() {
   };
   
   const handleLogoutClick = async () => {
-    setIsLoggingOut(true);
-    try {
-      await fetch('/api/internal/logout-session', { method: 'POST' });
-    } catch (e) {
-      console.error("Failed to clear backend session.", e);
-    } finally {
-      window.location.href = '/api/auth/logout?federated';
-    }
-  };
+        setIsLoggingOut(true);
+        try {
+            const tokenResponse = await fetch('/api/token');
+            const { accessToken } = await tokenResponse.json();
+            const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+            await fetch(`${apiBaseUrl}/api/session/logout`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+                body: JSON.stringify({ session_id: user.sid }),
+            });
+        } catch (e) {
+            console.error("Failed to clear backend session.", e);
+        } finally {
+            window.location.href = '/api/auth/logout';
+        }
+    };
 
   if (isLoading || (!user && !error)) {
     return <div className="flex min-h-[50vh] items-center justify-center"><div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-600"></div></div>;
