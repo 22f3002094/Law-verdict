@@ -76,8 +76,12 @@ class ActiveSessionResponse(BaseModel):
     logged_in_at: datetime
 
 
+origins = [
+    "http://localhost:3000",          # Your local development frontend
+    "https://law-verdict.vercel.app", # YOUR LIVE VERCEL FRONTEND URL
+]
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 
 @app.get("/")
